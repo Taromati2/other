@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<specialSkill>
+  <descriptor>8</descriptor>
+  <action>
+    <movewith/>
+  </action>
+  <sustain max="60"/>
+  <pattern-list width="64" height="64">
+    <image src="kikka/kikka_sp_0.bmp"/>
+    <adjust x="0" y="0" />
+    <pattern x="0" y="0" time="0" blend="ADD" alpha="120"/>
+    <pattern x="64" y="0" time="6" blend="ADD" alpha="120"/>
+    <pattern x="128" y="0" time="12" blend="ADD" alpha="120"/>
+    <pattern x="192" y="0" time="18" blend="ADD" alpha="120"/>
+    <pattern x="256" y="0" time="24" blend="ADD" alpha="120"/>
+    <pattern x="0" y="64" time="30" blend="ADD" alpha="120"/>
+    <pattern x="64" y="64" time="36" blend="ADD" alpha="120"/>
+    <pattern x="128" y="64" time="42" blend="ADD" alpha="120"/>
+    <pattern x="192" y="64" time="48" blend="ADD" alpha="120"/>
+    <pattern x="256" y="64" time="54" blend="ADD" alpha="120"/>
+  </pattern-list>
+</specialSkill>

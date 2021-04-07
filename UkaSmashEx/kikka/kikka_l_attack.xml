@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<specialSkill>
+  <descriptor>8</descriptor>
+  <action>
+    <movewith/>
+  </action>
+  <attack-list>
+  </attack-list>
+  <collision>
+    <exit/>
+  </collision>
+  <sustain max="5"/>
+  <pattern-list width="30" height="26">
+    <image src="kikka/kikka_l_attack.bmp"/>
+    <adjust x="15" y="13"/>
+    <pattern x="0" y="0" time="0"/>
+  </pattern-list>
+</specialSkill>

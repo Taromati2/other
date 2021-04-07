@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<specialSkill>
+  <descriptor>8</descriptor>
+  <action>
+    <move vx="-8" stime="0" etime="5"/>
+    <move vy="20" stime="0" etime="5"/>
+  </action>
+  <attack-list>
+    <attack x="24" y="24" width="16" height="16" stime="0" etime="1" power="10" smash="2" direction="RIGHT">
+        <attacker-action pos="attack-point">
+          <special adjx="-32" adjy="-32" src="_effect/sp_hit_middle.xml"/>
+        </attacker-action>
+    </attack>
+    <attack x="16" y="16" width="32" height="32" stime="2" etime="3" power="8" smash="1" direction="RIGHT">
+        <attacker-action pos="attack-point">
+          <special adjx="-32" adjy="-32" src="_effect/sp_hit_middle.xml"/>
+        </attacker-action>
+    </attack>
+    <attack x="8" y="8" width="48" height="48" stime="4" etime="5" power="6" smash="0.5" direction="RIGHT">
+        <attacker-action pos="attack-point">
+          <special adjx="-32" adjy="-32" src="_effect/sp_hit_middle.xml"/>
+        </attacker-action>
+    </attack>
+  </attack-list>
+  <collision>
+    <exit/>
+  </collision>
+  <sustain max="9"/>
+  <pattern-list width="64" height="64">
+    <image src="kikka/kikka_bullet.bmp"/>
+    <pattern x="0" y="0" time="0" />
+  </pattern-list>
+</specialSkill>

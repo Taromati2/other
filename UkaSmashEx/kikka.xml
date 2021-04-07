@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<character id="kikka" name="橘花" version="2.0">
+  <header>
+    <scriptor>8</scriptor>
+    <face-artist>8</face-artist>
+    <dot-artist>8</dot-artist>
+    <stand-artist>8</stand-artist>
+    <voice-artist>---</voice-artist>
+    <url>---</url>
+    <version>1.1</version>
+    <last-update>2005/01/14</last-update>
+    <comment>必殺:FiveseveN（地上）/P90（空中）</comment>
+    <status power="3" smash="3" defence="2" skill="8" jump="8" speed="7"/>
+    <order num="1"/>
+  </header>
+
+  <selection>
+    <face-img src="kikka/kikka_kao0.bmp"/>
+    <stand-img src="kikka/kikka_win1.bmp"/>
+    <desc-img src="kikka/kikka_desc.bmp"/>
+    <system-voice src="_se/ok.wav"/>
+  </selection>
+
+  <illust>
+    <face>
+      <image src="kikka/kikka_kao1.bmp"/>
+    </face>
+    <win>
+      <image src="kikka/kikka_win1.bmp" preload="off"/>
+    </win>
+  </illust>
+  <winvoice num="4">
+    <sound src="kikka/kikka40.wav" preload="off"/>
+    <sound src="kikka/kikka41.wav" preload="off"/>
+    <sound src="kikka/kikka42.wav" preload="off"/>
+    <sound src="kikka/kikka43.wav" preload="off"/>
+  </winvoice>
+
+  <common>
+    <debugs>
+      <print math="LASTTIME"/>
+      <print math="HP"/>
+      <print math="MP"/>
+      <print math="SCORE"/>
+      <print math="LIFE"/>
+      <print math="CURSE"/>
+      <print math="NOCHANGE"/>
+      <print math="EATED"/>
+      <print math="NOMOVE"/>
+      <print math="NOCHANGE"/>
+      <print math="STIME"/>
+      <print math="TIME"/>
+      <print math="KEY_X"/>
+      <print math="KEY_Y"/>
+      <print math="BTN_LEFT"/>
+      <print math="BTN_A"/>
+      <print math="BTN_B"/>
+      <print math="BTN_C"/>
+      <print math="X"/>
+      <print math="Y"/>
+      <print math="VX"/>
+      <print math="VY"/>
+      <print math="AX"/>
+      <print math="AY"/>
+      <print math="SX"/>
+      <print math="SY"/>
+      <print math="cos(X*3.14159/180)"/>
+    </debugs>
+    <bound x="22" y="15" width="20" height="49"/>
+    <environment gravity-p="125"/>
+    <movegrav up="90" down="160"/>
+    <mp-recover value="0.08"/>
+  </common>
+
+  <!--数式の初期化-->
+  <math-init>
+    <set name="jump" value="0"/>
+  </math-init>
+
+  <!-- 復活/登場する時 -->
+  <script name="appear" priority="1000" reverse="true">
+    <condition>
+      <state type="onAppear"/>
+    </condition>
+    <invincible/>
+    <no-move/>
+    <action>
+      <math>
+        <set name="jump" value="1"/>
+      </math>
+    </action>
+    <sustain min="60" remain="1" max="60"/>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="0" y="448" time="0"/>
+    </pattern-list>
+  </script>
+
+  <!-- 普通にたっているとき -->
+  <script name="stand" priority="15" reverse="true" keepDirection="true">
+    <condition>
+      <state type="onLand"/>
+    </condition>
+    <action>
+      <math>
+        <set name="jump" value="1"/>
+      </math>
+    </action>
+    <defence-list>
+       <defence stime="0" etime="99999999" normal="25" smash="25" x="21" y="14" width="23" height="50" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="0" y="448" time="0"/>
+    </pattern-list>
+  </script>
+
+  <!-- 歩く -->
+  <script name="walk" priority="20" reverse="true">
+    <condition>
+      <state type="onLand"/>
+      <key-stroke timing="continual">
+        <key id="LEFT" type="down"/>
+      </key-stroke>
+    </condition>
+    <sustain min="3" remain="1">
+      <state type="onLand"/>
+      <key-stroke timing="continual">
+        <key id="LEFT" type="down"/>
+      </key-stroke>
+    </sustain>
+    <action>
+      <move vx="1.9"/>
+      <math>
+        <set name="jump" value="1"/>
+      </math>
+    </action>
+    <defence-list>
+       <defence stime="0" etime="99999999" normal="25" smash="25" x="20" y="14" width="19" height="50" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="0"   y="0" time="0"/>
+      <pattern x="64"  y="0" time="10"/>
+      <pattern x="128" y="0" time="20"/>
+      <pattern x="192" y="0" time="30"/>
+      <pattern x="256" y="0" time="40"/>
+      <pattern x="320" y="0" time="50"/>
+      <repeat totime="0" time="60"/>
+    </pattern-list>
+  </script>
+
+  <!-- 走る -->
+  <script name="dash" priority="25" reverse="true">
+    <condition>
+      <state type="onLand"/>
+	    <key-stroke timing="continual">
+	      <key id="LEFT" type="down"/>
+	      <nop within="30"/>
+	      <key id="LEFT" type="up"/>
+	      <nop within="30"/>
+	      <key id="LEFT" type="down"/>
+	    </key-stroke>
+	  </condition>
+    <action>
+      <move vx="4.5"/>
+      <sound src="_se/ukase012.wav"/>
+      <math>
+        <set name="jump" value="1"/>
+      </math>
+      <exeffect x="0" y="32" src="_effect/dash.xml" time="0" interval="15"/>
+    </action>
+    <sustain min="14" remain="30">
+      <state type="onLand"/>
+	    <key-stroke timing="continual">
+	      <key id="LEFT" type="down"/>
+	      <nop within="30"/>
+	      <key id="LEFT" type="up"/>
+	      <nop within="30"/>
+	      <key id="LEFT" type="down"/>
+	    </key-stroke>
+    </sustain>
+    <defence-list>
+       <defence stime="0" etime="99999999" normal="22" smash="22" x="16" y="14" width="28" height="50" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="0"   y="64" time="0"/>
+      <pattern x="64"  y="64" time="5"/>
+      <pattern x="128" y="64" time="10"/>
+      <pattern x="192" y="64" time="15"/>
+      <pattern x="256" y="64" time="20"/>
+      <pattern x="318" y="64" time="25"/>
+      <repeat time="30" totime="0"/>
+    </pattern-list>
+  </script>
+
+  <!-- しゃがみ -->
+  <script name="SquatDown" priority="30" reverse="true" keepDirection="true">
+    <condition>
+      <state type="onLand"/>
+      <key-stroke timing="continual">
+        <key id="DOWN" type="down"/>
+      </key-stroke>
+    </condition>
+    <mp-recover value="0.3"/>
+    <action>
+      <math>
+        <set name="jump" value="1"/>
+      </math>
+    </action>
+    <defence-list>
+       <defence stime="0" etime="99999999" normal="30" smash="35" x="20" y="27" width="25" height="37" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="320" y="448" time="0"/>
+    </pattern-list>
+  </script>
+
+  <!-- しがみつき -->
+  <script name="catch" priority="20" reverse="true" keepDirection="true">
+    <condition>
+      <state type="CatchWall"/>
+      <state type="FALL"/>
+      <key-stroke timing="continual">
+        <key id="LEFT" type="down"/>
+      </key-stroke>
+    </condition>
+    <sustain>
+      <state type="onCatchWall"/>
+      <state type="FALL"/>
+      <key-stroke timing="continual">
+        <key id="LEFT" type="down"/>
+      </key-stroke>
+    </sustain>
+    <action>
+      <jump vy="0.3" stime="0" etime="120"/>
+      <move vx="0"/>
+      <math>
+        <set name="jump" value="1"/>
+        <set name="sp_attack" value="1"/>
+      </math>
+    </action>
+    <defence-list>
+       <defence stime="0" etime="99999999" normal="25" smash="25" x="18" y="13" width="31" height="48" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="256" y="448" time="0"/>
+    </pattern-list>
+  </script>
+
+  <!-- ジャンプ開始 -->
+  <script name="jump" priority="30" reverse="true" keepDirection="true">
+    <condition>
+      <state type="onLand"/>
+      <key-stroke>
+        <key id="C" type="down"/>
+      </key-stroke>
+    </condition>
+    <action>
+      <jump vy="-8.0"/>
+      <sound src="_se/ukase015.wav" time="0"/>
+      <math>
+        <set name="jump" value="1"/>
+      </math>
+      <exeffect x="0" y="32" src="_effect/jump.xml" time="0"/>
+    </action>
+    <defence-list>
+       <defence stime="0" etime="99999999" normal="25" smash="25" x="20" y="10" width="22" height="53" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="64"   y="448" time="0"/>
+    </pattern-list>
+    <sustain min="1"/>
+  </script>
+
+  <!-- 二段ジャンプ以降開始 -->
+  <script name="jump-more" priority="30" reverse="true" keepDirection="true">
+    <condition>
+      <math time="0">
+        <check name="jump" min="0" max="1"/>
+      </math>
+      <key-stroke>
+        <key id="C" type="down"/>
+      </key-stroke>
+    </condition>
+    <action>
+      <jump vy="-8.0"/>
+      <sound src="_se/ukase015.wav" time="0"/>
+      <exeffect x="0" y="32" src="_effect/jump.xml" time="0"/>
+      <math time="0">
+        <add name="jump" value="1"/>
+      </math>
+    </action>
+    <defence-list>
+      <defence stime="0" etime="99999999" normal="25" smash="25" x="20" y="10" width="22" height="53" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="64"   y="448" time="0"/>
+    </pattern-list>
+    <sustain min="1"/>
+  </script>
+
+  <!-- ジャンプで上昇中 -->
+  <script name="jumping" priority="5" reverse="true" keepDirection="true">
+    <condition>
+      <state type="onAir"/>
+      <state type="JUMP"/>
+    </condition>
+    <defence-list>
+      <defence stime="0" etime="99999999" normal="25" smash="25" x="20" y="10" width="22" height="53" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="64" y="448" time="0"/>
+    </pattern-list>
+    <sustain>
+      <state type="onAir"/>
+      <state type="JUMP"/>
+    </sustain>
+  </script>
+
+  <!-- ジャンプ上昇中に横ボタンを押した時。 -->
+  <script name="jump-move" priority="15" reverse="true">
+    <condition>
+      <state type="onAir"/>
+      <state type="JUMP"/>
+      <key-stroke timing="continual">
+        <key id="LEFT" type="down"/>
+      </key-stroke>
+    </condition>
+    <action>
+      <moveif vx="3.0" min="-99" max="3.0" stime="0" etime="1"/>
+      <accelerate ax="0.1"/>
+    </action>
+    <defence-list>
+      <defence stime="0" etime="99999999" normal="25" smash="25" x="20" y="10" width="22" height="53" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="64" y="448" time="0"/>
+    </pattern-list>
+    <sustain>
+      <state type="onAir"/>
+      <state type="JUMP"/>
+      <key-stroke timing="continual">
+        <key id="LEFT" type="down"/>
+      </key-stroke>
+    </sustain>
+  </script>
+
+  <!-- 落下している時 -->
+  <script name="fall" priority="5" reverse="true" keepDirection="true">
+    <condition>
+      <state type="onAir"/>
+      <state type="FALL"/>
+    </condition>
+    <defence-list>
+      <defence stime="0" etime="99999999" normal="25" smash="25" x="19" y="13" width="23" height="49" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="128" y="448" time="0"/>
+    </pattern-list>
+    <sustain>
+      <state type="onAir"/>
+      <state type="FALL"/>
+    </sustain>
+  </script>
+
+  <!-- 落下中に横方向ボタンを押した時。 -->
+  <script name="fall-move" priority="15" reverse="true">
+    <condition>
+      <state type="onAir"/>
+      <state type="FALL"/>
+      <key-stroke timing="continual">
+        <key id="LEFT" type="down"/>
+      </key-stroke>
+    </condition>
+    <action>
+      <moveif vx="3.0" min="-99" max="3.0" stime="0" etime="1"/>
+      <accelerate ax="0.1"/>
+    </action>
+    <defence-list>
+      <defence stime="0" etime="99999999" normal="25" smash="25" x="19" y="13" width="23" height="49" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="128" y="448" time="0"/>
+    </pattern-list>
+    <sustain>
+      <state type="onAir"/>
+      <state type="FALL"/>
+      <key-stroke timing="continual">
+        <key id="LEFT" type="down"/>
+      </key-stroke>
+    </sustain>
+  </script>
+
+  <!-- 小攻撃 「ナイフ」-->
+  <script name="attack" priority="50" reverse="true" keepDirection="true">
+    <condition>
+      <key-stroke>
+        <key id="A" type="down"/>
+      </key-stroke>
+    </condition>
+    <action>
+      <sound src="kikka/kikka20.wav" time="8"/>
+    </action>
+    <notrans-list>
+      <notrans stime="8" etime="15"/>
+    </notrans-list>
+    <sustain min="15"/>
+    <attack-list>
+      <attack x="5" y="32" width="13" height="13" stime="10" etime="19" power="8" smash="1.5" direction="LEFT">
+        <attacker-action pos="attack-point">
+          <special adjx="-32" adjy="-32" src="_effect/sp_hit_small.xml"/>
+        </attacker-action>
+      </attack>
+    </attack-list>
+    <defence-list>
+      <defence stime="0" etime="7" normal="20" smash="25" x="26" y="15" width="21" height="49" baseup="50"/>
+      <defence stime="8" etime="15" normal="20" smash="25" x="20" y="15" width="21" height="49" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="384" y="0" time="0"/>
+      <pattern x="448" y="0" time="3"/>
+      <pattern x="384" y="64" time="8"/>
+      <pattern x="448" y="64" time="13"/>
+   </pattern-list>
+  </script>	   
+
+  <!-- 大攻撃「チェンソー」 -->
+
+  <script name="large-attack" priority="60" reverse="true" keepDirection="true">
+    <condition>
+      <key-stroke>
+        <key id="LEFT|A" type="down" err="5"/>
+      </key-stroke>
+      <consumeif mp="10"/>
+    </condition>
+    <action>
+      <consume mp="10"/>
+      <sound src="kikka/kikka21.wav" time="0"/>
+      <sound src="_se/ukase013.wav" time="12"/>
+      <special x="-39" y="10" time="16" src="kikka/kikka_l_attack.xml"/>
+    </action>
+    <attack-list>
+      <attack x="7" y="45" width="12" height="7" stime="12" etime="15" power="20" smash="9.0"  direction="LEFT">
+        <attacker-action pos="attack-point">
+          <special adjx="-32" adjy="-32" src="_effect/sp_hit_middle.xml"/>
+        </attacker-action>
+      </attack>
+      <attack x="-19" y="28" width="25" height="19" stime="16" etime="20" power="20" smash="9.0"  direction="LEFT">
+        <attacker-action pos="attack-point">
+          <special adjx="-32" adjy="-32" src="_effect/sp_hit_middle.xml"/>
+        </attacker-action>
+      </attack>
+      <attack x="0" y="25" width="10" height="8" stime="21" etime="24" power="20" smash="9.0"  direction="LEFT">
+        <attacker-action pos="attack-point">
+          <special adjx="-32" adjy="-32" src="_effect/sp_hit_middle.xml"/>
+        </attacker-action>
+      </attack>
+    </attack-list>
+    <defence-list>
+	<defence stime="0" etime="11" normal="20" smash="25" x="21" y="14" width="23" height="50" baseup="50"/>
+	<defence stime="12" etime="15" normal="20" smash="25" x="15" y="15" width="23" height="49" baseup="50"/>
+	<defence stime="16" etime="24" normal="20" smash="25" x="10" y="15" width="23" height="49" baseup="50"/>
+	<defence stime="25" etime="28" normal="20" smash="25" x="13" y="15" width="23" height="49" baseup="50"/>
+	<defence stime="29" etime="32" normal="20" smash="25" x="17" y="15" width="23" height="49" baseup="50"/>
+	<defence stime="33" etime="36" normal="20" smash="25" x="21" y="14" width="23" height="50" baseup="50"/>
+    </defence-list>
+    <sustain min="37"/>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <adjust x="0" y="0"/>
+      <pattern x="0" y="128" time="0"/>
+      <pattern x="64" y="128" time="4"/>
+      <pattern x="128" y="128" time="8"/>
+      <pattern x="192" y="128" time="12"/>
+      <pattern x="256" y="128" time="16"/>
+      <pattern x="0" y="192" time="21"/>
+      <pattern x="64" y="192" time="25"/>
+      <pattern x="128" y="192" time="29"/>
+      <pattern x="192" y="192" time="33"/>
+   </pattern-list>
+  </script>
+
+  <!-- 必殺技（地上）「FiveseveN」 -->
+  <script name="fiveseven" priority="70" reverse="true" keepDirection="true">
+    <condition>
+      <state type="onLand"/>
+      <key-stroke>
+        <key id="B" type="down"/>
+      </key-stroke>
+      <consumeif mp="50"/>
+    </condition>
+    <action>
+      <consume mp="50"/>
+      <special x="-22" y="6" src="kikka/kikka_sp_1.xml" time="30"/>
+      <special x="20" y="4" src="kikka/kikka_sp_2.xml" time="30"/>
+      <special x="0" y="0" src="kikka/kikka_sp_0.xml" time="36"/>
+      <special x="-33" y="1" src="kikka/kikka_sp_1.xml" time="48"/>
+      <special x="32" y="1" src="kikka/kikka_sp_2.xml" time="48"/>
+      <special x="-18" y="-9" src="kikka/kikka_sp_1.xml" time="60"/>
+      <special x="-14" y="-1" src="kikka/kikka_sp_3.xml" time="66"/>
+      <special x="22" y="-13" src="kikka/kikka_sp_4.xml" time="72"/>
+      <special x="-19" y="-3" src="kikka/kikka_sp_1.xml" time="90"/>
+      <special x="-31" y="1" src="kikka/kikka_sp_1.xml" time="90"/>
+      <sound src="kikka/kikka23.wav" time="92"/>
+      <sound src="kikka/kikka23.wav" time="97"/>
+    </action>
+    <notrans-list>
+      <notrans stime="30" etime="100"/>
+    </notrans-list>
+    <defence-list>
+    <defence stime="0" etime="53" normal="28" smash="28" x="23" y="20" width="17" height="44" baseup="50"/>
+    <defence stime="54" etime="65" normal="28" smash="28" x="27" y="20" width="17" height="44" baseup="50"/>
+    <defence stime="66" etime="77" normal="28" smash="28" x="33" y="20" width="17" height="44" baseup="50"/>
+    <defence stime="78" etime="83" normal="28" smash="28" x="29" y="20" width="17" height="44" baseup="50"/>
+    <defence stime="84" etime="100" normal="28" smash="28" x="24" y="20" width="17" height="44" baseup="50"/>
+    </defence-list>
+    <sustain min="100"/>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <adjust x="0" y="0"/>
+      <pattern x="0" y="320" time="0"/>
+      <pattern x="64" y="320" time="6"/>
+      <pattern x="128" y="320" time="12"/>
+      <pattern x="192" y="320" time="18"/>
+      <pattern x="256" y="320" time="24"/>
+      <pattern x="320" y="320" time="30"/>
+      <pattern x="384" y="320" time="36"/>
+      <pattern x="448" y="320" time="42"/>
+      <pattern x="0" y="384" time="48"/>
+      <pattern x="64" y="384" time="54"/>
+      <pattern x="128" y="384" time="60"/>
+      <pattern x="192" y="384" time="66"/>
+      <pattern x="256" y="384" time="72"/>
+      <pattern x="320" y="384" time="78"/>
+      <pattern x="384" y="384" time="84"/>
+      <pattern x="448" y="384" time="90"/>
+    </pattern-list>
+  </script>
+
+  <!-- 必殺技（空中）「P90」 -->
+  <script name="fiveseven" priority="70" reverse="true" keepDirection="true">
+    <condition>
+      <state type="onAir"/>
+      <key-stroke>
+        <key id="B" type="down"/>
+      </key-stroke>
+      <consumeif mp="73"/>
+    </condition>
+    <action>
+      <consume mp="25"/>
+      <consume mp="10" time="15"/>
+      <consume mp="10" time="25"/>
+      <consume mp="10" time="35"/>
+      <consume mp="10" time="45"/>
+      <consume mp="10" time="55"/>
+      <move vx="1" vy="0" stime="0" etime="14"/>
+      <jump vy="-1" stime="0" etime="14"/>
+      <move vx="0.8" vy="-0.2" stime="15" etime="39"/>
+      <move vx="0.5" vy="-0.1" stime="40" etime="64"/>
+      <special x="6" y="30" src="kikka/kikka_sp_5.xml" time="15"/>
+      <special x="6" y="30" src="kikka/kikka_sp_6.xml" time="20"/>
+      <special x="6" y="30" src="kikka/kikka_sp_5.xml" time="25"/>
+      <special x="6" y="30" src="kikka/kikka_sp_6.xml" time="30"/>
+      <special x="6" y="30" src="kikka/kikka_sp_5.xml" time="35"/>
+      <special x="6" y="30" src="kikka/kikka_sp_6.xml" time="40"/>
+      <special x="6" y="30" src="kikka/kikka_sp_5.xml" time="45"/>
+      <special x="6" y="30" src="kikka/kikka_sp_6.xml" time="50"/>
+      <special x="6" y="30" src="kikka/kikka_sp_5.xml" time="55"/>
+      <special x="6" y="30" src="kikka/kikka_sp_6.xml" time="60"/>
+      <jump vy="0" stime="65" etime="80"/>
+      <move vx="0.5" vy="0" stime="65" etime="80"/>
+      
+    </action>
+    <notrans-list>
+      <notrans stime="15" etime="65"/>
+    </notrans-list>
+    <defence-list>
+      <defence stime="0" etime="99999999" normal="25" smash="25" x="19" y="13" width="23" height="49" baseup="50"/>
+    </defence-list>
+    <sustain min="80"/>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <adjust x="0" y="0"/>
+      <pattern x="0" y="256" time="0"/>
+      <pattern x="64" y="256" time="5"/>
+      <pattern x="128" y="256" time="10"/>
+      <pattern x="192" y="256" time="15"/>
+      <pattern x="256" y="256" time="65"/>
+      <pattern x="320" y="256" time="69"/>
+      <pattern x="384" y="256" time="74"/>
+    </pattern-list>
+  </script>
+
+  <!-- 攻撃を受ける -->
+  <script name="damage" priority="200" reverse="true" keepDirection="true">
+    <condition>
+      <state type="Damaged"/>
+    </condition>
+    <action>
+      <math time="0">
+        <set name="jump" value="1"/>
+      </math>
+    </action>
+    <attack-list>
+      <attack x="43" y="11" width="2" height="40" stime="8" etime="40"  power="2" smash="5" direction="RIGHT">
+        <!-- 攻撃があたった場合 アクションの中心座標 : attack-point, attacker-center, attackee-center-->
+        <attacker-action pos="attack-point">
+          <special adjx="-32" adjy="-32" src="_effect/sp_hit_small.xml"/>
+        </attacker-action>
+      </attack>
+    </attack-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="196" y="448" time="0"/>
+    </pattern-list>
+    <sustain min="3">
+      <state type="JUMP"/>
+    </sustain>
+  </script>
+
+  <!-- 交代 -->
+  <script name="change" priority="150" reverse="true" keepDirection="true">
+    <condition>
+      <key-stroke>
+        <key id="X" type="down"/>
+      </key-stroke>
+      <consumeif mp="10"/>
+    </condition>
+    <action>
+      <effect type="textEffect" x="0" y="0">
+        <image src="_battle/change.bmp"/>
+      </effect>
+      <consume mp="10"/>
+      <change time="10"/>
+    </action>
+    <defence-list>
+      <defence stime="0" etime="99999999" normal="25" smash="25" x="20" y="10" width="22" height="53" baseup="50"/>
+    </defence-list>
+    <pattern-list width="64" height="64">
+      <image src="kikka/kikka.bmp"/>
+      <pattern x="64" y="448" time="0"/>
+    </pattern-list>
+    <sustain min="10"/>
+  </script>
+</character>
