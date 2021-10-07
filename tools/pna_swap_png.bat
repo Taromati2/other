@@ -1,6 +1,8 @@
-chcp 65001
 @echo off
-for %%x in (%*) do (
+set "ARGS=%*"
+setlocal EnableDelayedExpansion
+for %%x in (!ARGS!) do (
+	endlocal
 	cd /d "%%x"
 	cd
 	for /r %%a in (*.pna) do ren "%%a" "%%~na.xxx"

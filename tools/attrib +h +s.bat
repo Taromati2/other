@@ -1,4 +1,6 @@
 @echo off
 echo Ö´ÐÐÖÐ........
-for %%x in (%*) do attrib +h +s "%%~dpx%%~nxx" 
+set "ARGS=%*"
+setlocal EnableDelayedExpansion
+for %%x in (!ARGS!) do attrib +h +s "%%~dpx%%~nxx" 
 pause
