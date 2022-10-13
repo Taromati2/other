@@ -1,0 +1,55 @@
+这是用于ai生成taromati（伪春菜人格）相关图的咒语列表
+本咒语列表不定时长期在 https://github.com/Taromati2/other/blob/master/%E7%B5%B5/AI/Taromati%E5%8F%AC%E5%94%A4%E5%92%92%E8%AF%AD.txt 更新
+
+如果你get到了不错的图，可以来群717638871（如果失效可以 https://bit.ly/TaroOicqGroup ），放在群文件里专门存ai画图的文件夹
+也可以对 https://github.com/Taromati2/other 提交PR
+如果你想在此之上进行修改（比如瑟图！），推荐用 https://deepl.com 翻译你想添加的tag并移除与此冲突的tag（比如裸体就没必要对衣物进行形容了对吧）来达到最好的效果
+如果你在此基础上有改进，务必联系咱同样的橘花厨们（ https://github.com/Taromati2 或者 discord https://bit.ly/TaroDiscordServer 或者 QQ群 ）
+玩的开心！
+
+基础咒语：建议所有图都加上
+{{{masterpiece}}}, best quality, highres, original, extremely detailed wallpaper, pixiv ranking 1st, {amazing,beautiful detailed eyes}
+环境光影相关的咒语，需要光影时加：depth of field, cinematic lighting, perfectly shaded, light_rays
+其他可选光影：
+[*]强边缘光照：strong rim light
+[*]强烈的阴影：intense shadows
+[*]黄金时段的灯光：golden hour lighting
+[*]太阳耀斑：sun flare
+[*]动态照明：dynamic lighting
+[*]柔和的环境照明：soft ambient lighting
+[*]强烈的阳光透过窗户照射进来：strong sunlight shining through the window
+
+基础反面咒语：你的工具有就加，没有的话别放正面，会出邪神
+lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, ugly, duplicate, morbid, mutilated, tranny, trans, transsexual, hermaphrodite, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, bad proportions, extra limbs, cloned face, disfigured, more than 2 nipples, extra arms, extra legs, fused fingers, too many fingers, text font ui, malformed hands, long neck, missing limb, multiple breasts, bad feet, futa, poorly drawn asymmetrical eyes, intricate human hands fingers, disconnected limbs, mutated hands and fingers, part of the head, floating limbs, long skeleton
+
+画人（而不是猫）时添加：perfect symmetrical pretty face, {beautiful character professional portrait of kawaii girl}, adorable girl, adorable face
+如果只生成单人（注意不是单猫）多加一个tag：1girl
+
+橘花
+正面tag
+Taromati, {kikka (Ukagaka)}, petite, {short hair long front and short back}, white hair, hair between eyes, riveted school uniform, deep red eyes, little girl, black stocking, hair down, black pantyhose, young girl, loli, short puff sleeves, short skirt, {white patterned trim on a black uniform}, {chunky cotton black boots with white trim}, {pure red necktie}, hands exposed, short shoes, white large collar with black trim, {{black thighhighs}}, small breasts, black shirt, black skirt
+反面tag：你的工具有就加，没有的话别放正面，会出邪神
+hair ornament, red shoe, white shoe, white sock, school badge, red skirt, white tie, giant butt, pant, tall shoe, different sleeves, braid
+
+
+斗和
+基础正面tag
+Taromati, {towa (Ukagaka)}, {{{black} cat tail}}, {{{black} cat ears {with white tips}}}, brown cowhide pet collar, {a ring of white fur on the end of the tail}, {black tail tip}, golden eyes, {{cat ear to right with a golden earring}}
+
+斗和（猫形态）
+如果只要猫多加这几个：{{cat only}}, {{{one}} cat}
+并不能保证只有一只猫就是了
+在前面追加正面tag
+black cat, white cat nose
+反面tag：你的工具有就加，没有的话别放正面，会出邪神
+furry
+
+斗和（人形态）
+在前面追加正面tag
+cat girl, monster girl, slit pupils, bright pupils, hair intakes, golden hair, long hair, curly hair, hair spread out, smoking, medium_breasts, shoulder, {black, corset, strapless, short sleeve, off-shoulder full dress}, red straps, black pantyhose, {{long dress with lace trim}}, {{black thighhighs}}, no shoes
+反面tag：你的工具有就加，没有的话别放正面，会出邪神
+furry, hair ornament, white tail, extra tails, shoes, bell, braid, white thighhighs, short dress
+
+其他可选附加咒语：
+[*]闪闪发光的动漫眼睛的优雅的睫毛：sparkling anime eyes and elegant eyelashes
+[*]闪闪发光（加上大概率星星眼，很可爱）：sparkle
